@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Marktmodell mit Angebot, Nachfrage, Gleichgewichtspreis und Gleichgewichtsmenge</title>
+  <desc id="desc">Preis-Mengen-Diagramm mit fallender Nachfragekurve, steigender Angebotskurve, Schnittpunkt als Marktgleichgewicht sowie gestrichelten Hilfslinien zu Gleichgewichtspreis und Gleichgewichtsmenge.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2b2118"/>
+    </marker>
+    <style>
+      .bg { fill: #fffdf9; }
+      .axis { stroke: #2b2118; stroke-width: 5; marker-end: url(#arrow); }
+      .grid { stroke: #e5dac8; stroke-width: 2; }
+      .curve-demand { fill: none; stroke: #a33b2b; stroke-width: 7; stroke-linecap: round; }
+      .curve-supply { fill: none; stroke: #0f5e59; stroke-width: 7; stroke-linecap: round; }
+      .helper { stroke: #7f6f60; stroke-width: 3; stroke-dasharray: 12 10; }
+      .point { fill: #2b2118; }
+      .label { fill: #2b2118; font-family: Georgia, "Times New Roman", serif; }
+      .small { font-size: 28px; }
+      .mid { font-size: 34px; font-weight: 700; }
+      .big { font-size: 40px; font-weight: 700; }
+      .box { fill: #f6efe4; stroke: #d9cfbf; stroke-width: 2; rx: 18; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="900" rx="34"/>
+
+  <g>
+    <line class="grid" x1="160" y1="700" x2="1010" y2="700"/>
+    <line class="grid" x1="160" y1="580" x2="1010" y2="580"/>
+    <line class="grid" x1="160" y1="460" x2="1010" y2="460"/>
+    <line class="grid" x1="160" y1="340" x2="1010" y2="340"/>
+    <line class="grid" x1="160" y1="220" x2="1010" y2="220"/>
+
+    <line class="grid" x1="280" y1="780" x2="280" y2="120"/>
+    <line class="grid" x1="430" y1="780" x2="430" y2="120"/>
+    <line class="grid" x1="580" y1="780" x2="580" y2="120"/>
+    <line class="grid" x1="730" y1="780" x2="730" y2="120"/>
+    <line class="grid" x1="880" y1="780" x2="880" y2="120"/>
+  </g>
+
+  <line class="axis" x1="160" y1="780" x2="1040" y2="780"/>
+  <line class="axis" x1="160" y1="780" x2="160" y2="90"/>
+
+  <path class="curve-demand" d="M 230 210 C 360 295, 500 390, 640 500 C 760 593, 860 670, 980 730"/>
+  <path class="curve-supply" d="M 230 705 C 375 620, 510 530, 650 430 C 780 340, 900 255, 990 180"/>
+
+  <line class="helper" x1="620" y1="448" x2="620" y2="780"/>
+  <line class="helper" x1="160" y1="448" x2="620" y2="448"/>
+  <circle class="point" cx="620" cy="448" r="10"/>
+
+  <rect class="box" x="715" y="120" width="285" height="92"/>
+  <text class="label mid" x="740" y="175">Angebotskurve</text>
+
+  <rect class="box" x="720" y="675" width="300" height="96"/>
+  <text class="label mid" x="745" y="733">Nachfragekurve</text>
+
+  <rect class="box" x="655" y="470" width="330" height="114"/>
+  <text class="label mid" x="680" y="520">Marktgleichgewicht</text>
+  <text class="label small" x="680" y="560">Schnittpunkt von Angebot und Nachfrage</text>
+
+  <rect class="box" x="36" y="390" width="160" height="96"/>
+  <text class="label mid" x="60" y="447">p*</text>
+  <text class="label small" x="60" y="478">Gleichgewichtspreis</text>
+
+  <rect class="box" x="515" y="792" width="220" height="88"/>
+  <text class="label mid" x="545" y="842">x*</text>
+  <text class="label small" x="545" y="872">Gleichgewichtsmenge</text>
+
+  <text class="label big" x="850" y="840">Menge</text>
+  <text class="label big" x="42" y="150" transform="rotate(-90 42 150)">Preis</text>
+
+  <text class="label small" x="255" y="815">geringe Menge</text>
+  <text class="label small" x="835" y="815">hohe Menge</text>
+  <text class="label small" x="72" y="735">niedriger Preis</text>
+  <text class="label small" x="72" y="205">hoher Preis</text>
+
+  <text class="label small" x="202" y="195" fill="#a33b2b">Nachfrage sinkt bei höherem Preis</text>
+  <text class="label small" x="210" y="735" fill="#0f5e59">Angebot steigt bei höherem Preis</text>
+</svg>

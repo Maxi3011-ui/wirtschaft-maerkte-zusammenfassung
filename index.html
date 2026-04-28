@@ -216,6 +216,33 @@
       color: var(--muted);
       font-size: 0.9rem;
     }
+    .diagram-card {
+      margin-top: 22px;
+      padding: 22px;
+      background: color-mix(in srgb, var(--paper) 92%, white 8%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .diagram-card h2 {
+      margin-bottom: 8px;
+    }
+    .diagram-copy {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .diagram-frame {
+      border: 1px solid rgba(108, 94, 75, 0.16);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fffdf9;
+    }
+    .diagram-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
     @media (max-width: 900px) {
       .hero-grid {
         grid-template-columns: 1fr;
@@ -290,6 +317,15 @@
     </header>
 
     <main class="sections" id="sections"></main>
+
+    <section class="diagram-card" aria-labelledby="diagram-title">
+      <span class="section-kicker">Zusatz</span>
+      <h2 id="diagram-title">Marktmodell als Diagramm</h2>
+      <p class="diagram-copy">Voll beschriftetes Preis-Mengen-Diagramm mit Angebotskurve, Nachfragekurve, Marktgleichgewicht, Gleichgewichtspreis <strong>p*</strong> und Gleichgewichtsmenge <strong>x*</strong>.</p>
+      <div class="diagram-frame">
+        <img src="./marktmodell.svg" alt="Voll beschriftetes Marktmodell mit Nachfragekurve, Angebotskurve, Gleichgewichtspreis p Stern und Gleichgewichtsmenge x Stern">
+      </div>
+    </section>
 
     <p class="footer">Basierend auf der gekürzten Fassung von „Ökonomisches Handeln auf Märkten“.</p>
   </div>
