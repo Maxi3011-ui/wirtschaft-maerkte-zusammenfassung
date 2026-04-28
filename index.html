@@ -301,6 +301,7 @@
     const jumpButton = document.getElementById('jump-button');
     const navCurrent = document.getElementById('nav-current');
     const sectionsRoot = document.getElementById('sections');
+    const topics = [];
 
     const escapeHtml = (value) =>
       value.replace(/[&<>"']/g, (char) => ({
@@ -311,38 +312,56 @@
         "'": '&#39;'
       }[char]));
 
+    function shortMainTitle(title) {
+      return title.replace(/\s*-\s*.*/, '');
+    }
+
+    function buildTopics() {
+      topics.length = 0;
+      sections.forEach((section) => {
+        const mainTitle = shortMainTitle(section.title);
+        const sectionNumber = (section.title.match(/^\d+\.\d+/) || [''])[0];
+        section.groups.forEach((group, index) => {
+          const topicId = `${section.id}-g${index + 1}`;
+          const shortLabel = `${sectionNumber} ${group.title}`.trim();
+          topics.push({
+            id: topicId,
+            shortLabel,
+            mainTitle,
+            fullTitle: section.title,
+            groupTitle: group.title,
+            items: group.items
+          });
+        });
+      });
+    }
+
     function renderSections() {
-      sectionsRoot.innerHTML = sections.map((section, index) => {
-        const groups = section.groups.map((group) => `
+      sectionsRoot.innerHTML = topics.map((topic, index) => `
+        <article class="section-card" id="${topic.id}" data-section-id="${topic.id}">
+          <span class="section-kicker">Thema ${String(index + 1).padStart(2, '0')}</span>
+          <h2>${escapeHtml(topic.groupTitle)}</h2>
           <section class="group">
-            <h3>${escapeHtml(group.title)}</h3>
+            <h3>${escapeHtml(topic.mainTitle)}</h3>
             <ul>
-              ${group.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+              ${topic.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
             </ul>
           </section>
-        `).join('');
-
-        return `
-          <article class="section-card" id="${section.id}" data-section-id="${section.id}">
-            <span class="section-kicker">Thema ${String(index + 1).padStart(2, '0')}</span>
-            <h2>${escapeHtml(section.title)}</h2>
-            ${groups}
-          </article>
-        `;
-      }).join('');
+        </article>
+      `).join('');
     }
 
     function renderSelect() {
-      select.innerHTML = sections.map((section) => `
-        <option value="${section.id}">${escapeHtml(section.title)}</option>
+      select.innerHTML = topics.map((topic) => `
+        <option value="${topic.id}">${escapeHtml(topic.shortLabel)}</option>
       `).join('');
     }
 
     function updateCurrentLabel(id) {
-      const current = sections.find((section) => section.id === id);
+      const current = topics.find((topic) => topic.id === id);
       if (!current) return;
       select.value = id;
-      navCurrent.textContent = `Aktuell ausgewählt: ${current.title}`;
+      navCurrent.textContent = `Aktuell ausgewählt: ${current.shortLabel}`;
     }
 
     function scrollToSection(id) {
@@ -353,10 +372,11 @@
       history.replaceState(null, '', `#${id}`);
     }
 
+    buildTopics();
     renderSections();
     renderSelect();
 
-    const initialId = location.hash.slice(1) || sections[0]?.id;
+    const initialId = location.hash.slice(1) || topics[0]?.id;
     if (initialId) {
       updateCurrentLabel(initialId);
     }
