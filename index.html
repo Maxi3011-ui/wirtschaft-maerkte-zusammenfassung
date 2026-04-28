@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Wirtschaft & Märkte</title>
+  <meta name="description" content="Kompakte Website zur gekürzten Zusammenfassung 'Ökonomisches Handeln auf Märkten' mit Themenauswahl und Scroll-Navigation.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f0e8;
+      --paper: #fcfaf6;
+      --paper-strong: #fffdf9;
+      --line: #d9cfbf;
+      --text: #241d15;
+      --muted: #6e6254;
+      --accent: #0f5e59;
+      --accent-soft: #dcebe8;
+      --shadow: 0 18px 40px rgba(56, 38, 20, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      background: linear-gradient(180deg, #efe7db 0%, var(--bg) 30%, #f7f2ea 100%);
+    }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(15, 94, 89, 0.06), transparent 28rem),
+        radial-gradient(circle at top right, rgba(163, 120, 70, 0.08), transparent 24rem),
+        linear-gradient(180deg, #efe7db 0%, var(--bg) 30%, #f7f2ea 100%);
+    }
+    a { color: inherit; }
+    .shell {
+      width: min(1080px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+    .hero {
+      padding: 18px 0 12px;
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font: 700 0.82rem/1.1 "Trebuchet MS", "Segoe UI", sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 11ch;
+      font-size: clamp(2.6rem, 8vw, 5.4rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+    }
+    .lead {
+      margin: 14px 0 0;
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.3vw, 1.12rem);
+      line-height: 1.45;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.9fr);
+      gap: 18px;
+      align-items: end;
+    }
+    .hero-card,
+    .nav-card,
+    .section-card {
+      background: color-mix(in srgb, var(--paper) 92%, white 8%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-card {
+      padding: 26px 24px 22px;
+      min-height: 260px;
+    }
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .meta-block {
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .meta-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font: 700 0.76rem/1.1 "Trebuchet MS", "Segoe UI", sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .meta-value {
+      display: block;
+      font-size: 1.18rem;
+      font-weight: 700;
+    }
+    .nav-wrap {
+      position: sticky;
+      top: 12px;
+      align-self: start;
+    }
+    .nav-card {
+      padding: 18px;
+      backdrop-filter: blur(10px);
+      background: rgba(252, 250, 246, 0.9);
+    }
+    .nav-title {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+    .nav-copy {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.4;
+    }
+    .nav-controls {
+      display: grid;
+      gap: 10px;
+    }
+    select,
+    button {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--paper-strong);
+      color: var(--text);
+      font: inherit;
+    }
+    select {
+      min-height: 52px;
+      padding: 0 14px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    button {
+      min-height: 48px;
+      padding: 0 16px;
+      font: 700 0.98rem/1 "Trebuchet MS", "Segoe UI", sans-serif;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      background: linear-gradient(180deg, #135d58, #0f4e49);
+      border-color: #0f4e49;
+      color: #f8f4ee;
+    }
+    button:hover { filter: brightness(1.04); }
+    .nav-current {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    .sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 18px;
+    }
+    .section-card {
+      padding: 24px 22px 20px;
+      scroll-margin-top: 110px;
+    }
+    .section-kicker {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font: 700 0.78rem/1 "Trebuchet MS", "Segoe UI", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+    .group {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 16px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(108, 94, 75, 0.16);
+    }
+    .group:first-of-type { border-top: 0; padding-top: 0; }
+    h3 {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.25;
+      font-weight: 700;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li {
+      margin: 0 0 7px;
+      color: #2f271f;
+      line-height: 1.4;
+    }
+    li:last-child { margin-bottom: 0; }
+    .footer {
+      margin-top: 24px;
+      padding: 0 4px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-wrap {
+        position: sticky;
+        top: 0;
+      }
+    }
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100vw - 18px, 1080px);
+        padding-top: 12px;
+      }
+      .hero-card,
+      .nav-card,
+      .section-card {
+        border-radius: 16px;
+      }
+      .hero-card,
+      .section-card {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .hero-meta {
+        grid-template-columns: 1fr 1fr;
+      }
+      .group {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      h1 {
+        max-width: none;
+      }
+      .section-card {
+        scroll-margin-top: 96px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div class="hero-grid">
+        <section class="hero-card">
+          <p class="eyebrow">Lernseite</p>
+          <h1>Wirtschaft &amp; Märkte</h1>
+          <p class="lead">Die gekürzte Zusammenfassung als scrollbare Website: klar gegliedert, kompakt und ohne unnötigen Fließtext. Oben wählst du direkt ein Thema aus, unten kannst du normal durch alle Inhalte scrollen.</p>
+          <div class="hero-meta">
+            <div class="meta-block">
+              <span class="meta-label">Fach</span>
+              <span class="meta-value">Wirtschaft und Recht</span>
+            </div>
+            <div class="meta-block">
+              <span class="meta-label">Format</span>
+              <span class="meta-value">Themen + Stichpunkte</span>
+            </div>
+          </div>
+        </section>
+        <aside class="nav-wrap">
+          <div class="nav-card">
+            <p class="nav-title">Zum Thema springen</p>
+            <p class="nav-copy">Dropdown auswählen, dann springt die Seite direkt zum passenden Abschnitt. Beim Scrollen aktualisiert sich die Auswahl automatisch.</p>
+            <div class="nav-controls">
+              <select id="topic-select" aria-label="Thema auswählen"></select>
+              <button id="jump-button" type="button">Zum ausgewählten Thema</button>
+            </div>
+            <p class="nav-current" id="nav-current"></p>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <main class="sections" id="sections"></main>
+
+    <p class="footer">Basierend auf der gekürzten Fassung von „Ökonomisches Handeln auf Märkten“.</p>
+  </div>
+
+  <script src="./content.js"></script>
+  <script>
+    const sections = window.SECTIONS ?? [];
+    const select = document.getElementById('topic-select');
+    const jumpButton = document.getElementById('jump-button');
+    const navCurrent = document.getElementById('nav-current');
+    const sectionsRoot = document.getElementById('sections');
+
+    const escapeHtml = (value) =>
+      value.replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char]));
+
+    function renderSections() {
+      sectionsRoot.innerHTML = sections.map((section, index) => {
+        const groups = section.groups.map((group) => `
+          <section class="group">
+            <h3>${escapeHtml(group.title)}</h3>
+            <ul>
+              ${group.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+            </ul>
+          </section>
+        `).join('');
+
+        return `
+          <article class="section-card" id="${section.id}" data-section-id="${section.id}">
+            <span class="section-kicker">Thema ${String(index + 1).padStart(2, '0')}</span>
+            <h2>${escapeHtml(section.title)}</h2>
+            ${groups}
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderSelect() {
+      select.innerHTML = sections.map((section, index) => `
+        <option value="${section.id}">Thema ${String(index + 1).padStart(2, '0')} — ${escapeHtml(section.title)}</option>
+      `).join('');
+    }
+
+    function updateCurrentLabel(id) {
+      const current = sections.find((section) => section.id === id);
+      if (!current) return;
+      select.value = id;
+      navCurrent.textContent = `Aktuell ausgewählt: ${current.title}`;
+    }
+
+    function scrollToSection(id) {
+      const node = document.getElementById(id);
+      if (!node) return;
+      node.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      updateCurrentLabel(id);
+      history.replaceState(null, '', `#${id}`);
+    }
+
+    renderSections();
+    renderSelect();
+
+    const initialId = location.hash.slice(1) || sections[0]?.id;
+    if (initialId) {
+      updateCurrentLabel(initialId);
+    }
+
+    select.addEventListener('change', () => scrollToSection(select.value));
+    jumpButton.addEventListener('click', () => scrollToSection(select.value));
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+      updateCurrentLabel(visible.target.dataset.sectionId);
+    }, {
+      rootMargin: '-20% 0px -55% 0px',
+      threshold: [0.12, 0.35, 0.65]
+    });
+
+    document.querySelectorAll('[data-section-id]').forEach((node) => observer.observe(node));
+
+    if (location.hash) {
+      requestAnimationFrame(() => scrollToSection(location.hash.slice(1)));
+    }
+  </script>
+</body>
+</html>
