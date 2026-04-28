@@ -339,6 +339,7 @@
         'Folgen für den Markt': 'Marktfolgen',
         'Individuelle Preisdifferenzierung': 'Dynamic Pricing',
         'Schutz vor personalisierten Preisen': 'Schutz',
+        'Vor- und Nachteile der Plattformökonomie': 'Plattform Vor- und Nachteile',
         'Marktformen im Detail nach Stackelberg': 'Marktformen Detail',
         'Grenznutzen und Grenzkosten': 'Grenznutzen und Grenzkosten',
         'Kundenbewertungen im Internet': 'Kundenbewertungen',
@@ -353,6 +354,7 @@
         const mainTitle = shortMainTitle(section.title);
         const sectionNumber = (section.title.match(/^\d+\.\d+/) || [''])[0];
         section.groups.forEach((group, index) => {
+          if (!group.items || group.items.length === 0) return;
           const topicId = `${section.id}-g${index + 1}`;
           const shortLabel = shortGroupTitle(sectionNumber, group.title);
           topics.push({

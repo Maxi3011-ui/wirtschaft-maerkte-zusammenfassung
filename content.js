@@ -237,8 +237,10 @@ window.SECTIONS = [
           "Hohe Markttransparenz",
           "Viele Anbieter und Nachfrager",
           "Zeitlich und räumlich unabhängig",
+          "Keine räumlichen und zeitlichen Präferenzen",
           "Hohe Informations- und Preistransparenz",
           "Sehr geringe Transaktionskosten",
+          "Freier Marktzutritt",
           "Virtuelle Märkte kommen dem vollkommenen Markt nahe"
         ]
       },
@@ -303,6 +305,7 @@ window.SECTIONS = [
         "title": "Konzentrationsprozess und Netzwerkeffekt",
         "items": [
           "Je mehr Nutzer ein Netzwerk hat, desto attraktiver wird es",
+          "Der Nutzen eines Produkts oder einer Dienstleistung steigt, wenn es mehr Menschen verwenden",
           "Mehr Nutzer ziehen mehr Anbieter an",
           "Folge: Marktkonzentration auf wenige große Plattformen",
           "Prinzip: winner takes it all"
@@ -323,7 +326,16 @@ window.SECTIONS = [
         "items": [
           "Plattformen bringen Anbieter und Nachfrager zusammen",
           "Beispiele: Amazon, Airbnb, Uber",
+          "Sie senken Transaktionskosten und wachsen oft ohne eigene Lagerhaltung",
           "Führende Plattformen erreichen Marktwerte über dem BIP mancher Staaten"
+        ]
+      },
+      {
+        "title": "Vor- und Nachteile der Plattformökonomie",
+        "items": [
+          "Vorteile: hohe Skalierbarkeit, viele Monetarisierungsmöglichkeiten, breites Sortiment auch ohne eigene Produkte",
+          "Nachteile: kleinere Unternehmen werden verdrängt, gegen große Plattformen ist es schwer anzukommen",
+          "Neue Plattformen scheitern oft bei zu geringer Nachfrage oder werden früh aufgekauft"
         ]
       },
       {
@@ -342,9 +354,11 @@ window.SECTIONS = [
         "title": "Individuelle Preisdifferenzierung",
         "items": [
           "Gleiches Produkt wird verschiedenen Kunden zu verschiedenen Preisen angeboten",
+          "Preise können in Echtzeit an Zahlungsbereitschaft, Verhalten und Merkmale einzelner Kunden angepasst werden",
           "Ziel: maximale Zahlungsbereitschaft abschöpfen",
           "Datenbasis: IP-Adresse, Standort, Endgerät, Browser, Suchverlauf, Cookies",
-          "Algorithmen leiten daraus Zahlungsbereitschaft ab"
+          "Jeder Website-Besuch hinterlässt Datenspuren, aus denen Algorithmen die Zahlungsbereitschaft ableiten",
+          "Möglich sind höhere Gewinnspannen, aber auch Kundenenttäuschung"
         ]
       },
       {
