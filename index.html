@@ -316,6 +316,37 @@
       return title.replace(/\s*-\s*.*/, '');
     }
 
+    function shortGroupTitle(sectionNumber, groupTitle) {
+      const map = {
+        'Ziele der Marktteilnehmer': 'Ziele',
+        'Arbeitsteilung und Spezialisierung': 'Arbeitsteilung',
+        'Einflussfaktoren auf das Angebot': 'Angebotsfaktoren',
+        'Einflussfaktoren auf die Nachfrage': 'Nachfragefaktoren',
+        'Angebots- und Nachfrageüberhang': 'Überhang',
+        'Koordinationsfunktion des Marktes': 'Koordination',
+        'Beispiel Berliner Mietendeckel': 'Mietendeckel',
+        'Prämissen des vollkommenen Marktes': 'Annahmen',
+        'Vollständige Konkurrenz': 'Konkurrenz',
+        'Nutzen des Marktmodells': 'Nutzen',
+        'Verschiebung der Kurven': 'Kurven',
+        'Substitutive und komplementäre Güter': 'Substitute und Komplemente',
+        'Praxisbeispiele': 'Beispiele',
+        'Corona-Effekt im Onlinehandel': 'Corona-Effekt',
+        'Vorteile des Online-Handels': 'Vorteile',
+        'Nachteile und Risiken': 'Risiken',
+        'Sekundärmarkt und Secondhand-Boom': 'Secondhand',
+        'Konzentrationsprozess und Netzwerkeffekt': 'Netzwerkeffekt',
+        'Folgen für den Markt': 'Marktfolgen',
+        'Individuelle Preisdifferenzierung': 'Dynamic Pricing',
+        'Schutz vor personalisierten Preisen': 'Schutz',
+        'Marktformen im Detail nach Stackelberg': 'Marktformen Detail',
+        'Grenznutzen und Grenzkosten': 'Grenznutzen und Grenzkosten',
+        'Kundenbewertungen im Internet': 'Kundenbewertungen',
+        'Skalierbarkeit digitaler Geschäftsmodelle': 'Skalierbarkeit digital'
+      };
+      return map[groupTitle] || groupTitle;
+    }
+
     function buildTopics() {
       topics.length = 0;
       sections.forEach((section) => {
@@ -323,10 +354,11 @@
         const sectionNumber = (section.title.match(/^\d+\.\d+/) || [''])[0];
         section.groups.forEach((group, index) => {
           const topicId = `${section.id}-g${index + 1}`;
-          const shortLabel = `${sectionNumber} ${group.title}`.trim();
+          const shortLabel = shortGroupTitle(sectionNumber, group.title);
           topics.push({
             id: topicId,
             shortLabel,
+            sectionNumber,
             mainTitle,
             fullTitle: section.title,
             groupTitle: group.title,
@@ -352,16 +384,26 @@
     }
 
     function renderSelect() {
-      select.innerHTML = topics.map((topic) => `
-        <option value="${topic.id}">${escapeHtml(topic.shortLabel)}</option>
-      `).join('');
+      let html = '';
+      let currentGroup = '';
+      topics.forEach((topic) => {
+        const groupLabel = `${topic.sectionNumber} ${topic.mainTitle.replace(/^\d+\.\d+\s*/, '')}`.trim();
+        if (groupLabel !== currentGroup) {
+          if (currentGroup) html += '</optgroup>';
+          currentGroup = groupLabel;
+          html += `<optgroup label="${escapeHtml(groupLabel)}">`;
+        }
+        html += `<option value="${topic.id}">${escapeHtml(topic.shortLabel)}</option>`;
+      });
+      if (currentGroup) html += '</optgroup>';
+      select.innerHTML = html;
     }
 
     function updateCurrentLabel(id) {
       const current = topics.find((topic) => topic.id === id);
       if (!current) return;
       select.value = id;
-      navCurrent.textContent = `Aktuell ausgewählt: ${current.shortLabel}`;
+      navCurrent.textContent = `Aktuell ausgewählt: ${current.sectionNumber} ${current.shortLabel}`;
     }
 
     function scrollToSection(id) {
