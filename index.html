@@ -333,8 +333,8 @@
     }
 
     function renderSelect() {
-      select.innerHTML = sections.map((section, index) => `
-        <option value="${section.id}">Thema ${String(index + 1).padStart(2, '0')} — ${escapeHtml(section.title)}</option>
+      select.innerHTML = sections.map((section) => `
+        <option value="${section.id}">${escapeHtml(section.title)}</option>
       `).join('');
     }
 
